@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-const NAV_IDS = ["hero", "experience", "portfolio", "skills", "sertificates", "contact"];
+const NAV_IDS = ["hero", "experience", "portfolio", "skills", "certificates", "contact"];
 
 function ContactForm() {
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
@@ -462,7 +462,7 @@ export default function Home() {
                   <h3 className="font-display font-bold text-2xl mb-4 text-zinc-900 dark:text-white">Teaching</h3>
                   <div>
                     <p className="font-semibold text-zinc-900 dark:text-white">Yogyakarta University of Technology</p>
-                    <p className="italic text-zinc-500 dark:text-zinc-300 text-sm mt-1">Assistant Professor &nbsp;&nbsp;2020-2024</p>
+                    <p className="italic text-zinc-500 dark:text-zinc-300 text-sm mt-1">Assistant Professor &nbsp;&nbsp;2024</p>
                     <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mt-2">
                       Assisted lecturers in teaching programming and systems courses, mentoring students through practical software development exercises.
                     </p>
@@ -477,7 +477,7 @@ export default function Home() {
                 <div className="-mt-6 flex flex-col gap-8">
                   <div>
                     <p className="font-semibold text-zinc-900 dark:text-white">PT. Gama Integra Informatika</p>
-                    <p className="italic text-zinc-500 dark:text-zinc-300 text-sm mt-1">Web Programmer &nbsp;&nbsp;2020-2024</p>
+                    <p className="italic text-zinc-500 dark:text-zinc-300 text-sm mt-1">Web Programmer &nbsp;&nbsp;2023</p>
                     <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mt-2">
                       Built and maintained web applications, collaborating with cross-functional teams to deliver features on schedule and improve code quality.
                     </p>
@@ -485,7 +485,7 @@ export default function Home() {
 
                   <div>
                     <p className="font-semibold text-zinc-900 dark:text-white">PT. Swevel Universal Media</p>
-                    <p className="italic text-zinc-500 dark:text-zinc-300 text-sm mt-1">Database Administrator &nbsp;&nbsp;2020-2024</p>
+                    <p className="italic text-zinc-500 dark:text-zinc-300 text-sm mt-1">Database Administrator &nbsp;&nbsp;2023</p>
                     <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mt-2">
                       Managed and optimized production databases, ensuring data integrity, performance tuning, and reliable backup strategies.
                     </p>
@@ -518,54 +518,56 @@ export default function Home() {
             <div className="grid md:grid-cols-2 gap-x-10 gap-y-16">
               {[
                 {
-                  tag: "FISUMKM",
-                  title: "Financial System for UMKM",
+                  tag: "HIGHER EDUCATION",
+                  title: "SIMAHA — Student Organization Management System",
                   description:
-                    "A multi-tenant accounting and financial reporting system built for Indonesian small and medium businesses (F&B UMKM).",
-                  image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=700&q=80",
-                  href: "#",
+                    "A web-based system for Yogyakarta University of Technology to manage proposal submissions and activity reports for student organizations and clubs (UKM) campus-wide.",
+                  image: "/simaha.png",
+                  href: "https://simaha.uty.ac.id",
                   offset: false,
                 },
                 {
-                  tag: "PUBLIC SECTOR",
-                  title: "BLUD Financial Reporting System",
+                  tag: "SAAS · TENDER INTELLIGENCE",
+                  title: "TenderPlus — Tender Monitoring & Bid Analysis Platform",
                   description:
-                    "A Laravel + React financial reporting platform for BLUD institutions, generating LO, LAK, and LPE reports with PDF/Excel export.",
-                  image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=700&q=80",
-                  href: "#",
+                    "A subscription-based SaaS platform aggregating public tender data from Indonesian government agencies (including Kementerian PUPR), with competitor tracking and win-probability analysis for paid users. Free-tier users get access to general tender listings.",
+                  image: "/tenderplus.png",
+                  href: "https://tenderplus.id",
                   offset: true,
                 },
                 {
-                  tag: "ZAKAT MANAGEMENT",
-                  title: "BAZNAS Finance & Asset System",
+                  tag: "ENTERPRISE · QUALITY MANAGEMENT",
+                  title: "SMM — Quality Management System for KAP Sandra Pracipta",
                   description:
-                    "A comprehensive zakat management system covering financial records, asset depreciation, and journal entries for BAZNAS.",
-                  image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=700&q=80",
-                  href: "#",
+                    "A comprehensive enterprise system combining a public-facing landing page (marketing and recruitment) with an internal platform covering employee attendance, KPI tracking, e-learning, audit document storage, internal accounting, correspondence management, and digital audit working papers.",
+                  image: "/smm-kap.png",
+                  href: "https://kapsandrapracipta.id",
                   offset: false,
                 },
                 {
-                  tag: "AUDIT FIRM",
-                  title: "SMM-KAP Audit Management",
+                  tag: "FINTECH · NON-PROFIT",
+                  title: "FISBAZ — Zakat Financial Management System",
                   description:
-                    "An audit working paper and document management system for KAP Sandra Pracipta, streamlining firm-wide audit workflows.",
-                  image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=700&q=80",
-                  href: "#",
+                    "A specialized accounting platform for Indonesia's National Zakat Board (BAZNAS), generating standardized financial statements for zakat, infaq, and sedekah funds in compliance with PSAK 409 and applicable Indonesian regulations. Features real-time dashboards, fund tracking, and secure data management.",
+                  image: "/fisbaz.png",
+                  href: "https://fiskeu.com/login",
                   offset: true,
                 },
                 {
-                  tag: "WAREHOUSE",
-                  title: "Inventory Gudang App",
+                  tag: "GOVTECH · HEALTHCARE FINANCE",
+                  title: "FISBLUD — BLUD Financial Management System",
                   description:
-                    "An ASP.NET Core MVC warehouse inventory application for tracking stock movement, purchase orders, and stock levels in real time.",
-                  image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=700&q=80",
-                  href: "#",
+                    "An integrated accounting platform for Regional Public Service Agencies (BLUD), primarily serving Puskesmas (community health centers), compliant with Ministry of Health (Kemenkes) and Indonesian government accounting standards. Features hierarchical reporting, allowing sub-district and district health office heads to review consolidated reports across all Puskesmas under their jurisdiction.",
+                  image: "/fisblud.png",
+                  href: "https://fisblud.com",
                   offset: false,
                 },
               ].map((project, i) => (
                 <a
                   key={project.title}
                   href={project.href}
+                  target="_blank"
+                  rel ="noopener noreferrer"
                   className={`reveal ${i % 2 === 0 ? "d1" : "d2"} group flex flex-col gap-5 ${
                     project.offset ? "md:mt-20" : ""
                   }`}
@@ -650,7 +652,7 @@ export default function Home() {
         </section>
 
         {/* CERTIFICATES */}
-        <section id="sertificates" className="py-24">
+        <section id="certificates" className="py-24">
           <div className="max-w-6xl mx-auto px-6">
             <div className="reveal text-center mb-14">
               <p className="text-xs font-medium text-accent tracking-widest uppercase mb-3">Certificate</p>
@@ -683,16 +685,16 @@ export default function Home() {
                   </p>
 
                   <div className="reveal d3 flex flex-col gap-4">
-                    <a href="mailto:hello@example.com" className="group flex items-center gap-3 text-zinc-400 hover:text-white transition-colors">
+                    <a href="mailto:sonarianda01@gmail.com" className="group flex items-center gap-3 text-zinc-400 hover:text-white transition-colors">
                       <span className="w-9 h-9 flex items-center justify-center bg-zinc-800 rounded-lg group-hover:bg-accent/20 transition-colors shrink-0">
                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                         </svg>
                       </span>
-                      <span className="text-sm">hello@example.com</span>
+                      <span className="text-sm">sonarianda01@gmail.com</span>
                     </a>
                     <a
-                      href="#"
+                      href="https://www.linkedin.com/in/sona-rianda-s-kom-a82b71237/"
                       rel="noopener noreferrer"
                       target="_blank"
                       className="group flex items-center gap-3 text-zinc-400 hover:text-white transition-colors"
@@ -702,7 +704,7 @@ export default function Home() {
                           <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
                         </svg>
                       </span>
-                      <span className="text-sm">linkedin.com/in/sona-rianda</span>
+                      <span className="text-sm">linkedin.com/sona-rianda</span>
                     </a>
                     <a
                       href="https://github.com/sona2503"
