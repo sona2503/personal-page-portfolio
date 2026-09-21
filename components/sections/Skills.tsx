@@ -1,3 +1,7 @@
+"use client";
+
+import { useLanguage } from "@/lib/i18n/LanguageContext";
+
 const SKILLS = [
   { name: "Javascript", slug: "javascript" },
   { name: "Typescript", slug: "typescript" },
@@ -17,14 +21,18 @@ const SKILLS = [
 ];
 
 export default function Skills() {
+  const { t } = useLanguage();
+
   return (
     <section id="skills" className="py-24 bg-zinc-50 dark:bg-zinc-900/40">
       <div className="max-w-6xl mx-auto px-6">
         <div className="reveal text-center mb-14">
           <p className="text-xs font-medium text-accent tracking-widest uppercase mb-3">
-            My <span className="text-accent">Stack</span>
+            {t.skills.eyebrow} <span className="text-accent">{t.skills.eyebrowAccent}</span>
           </p>
-          <h2 className="font-display font-bold text-4xl md:text-5xl text-zinc-900 dark:text-white">Professional Skills</h2>
+          <h2 className="font-display font-bold text-4xl md:text-5xl text-zinc-900 dark:text-white">
+            {t.skills.heading}
+          </h2>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">

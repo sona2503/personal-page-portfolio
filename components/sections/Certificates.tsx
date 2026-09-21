@@ -1,28 +1,23 @@
 "use client";
 
 import { useState } from "react";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 
-const CERTIFICATES = [
-  {
-    title: "Machine Learning Professional Certification",
-    issuer: "Rapidminer",
-    year: "2023",
-    image: "/machine-learning.jpg",
-  },
-  {
-    title: "Data Engineering Professional Certification",
-    issuer: "Rapidminer",
-    year: "2022",
-    image: "/data-enginering.jpeg",
-  },
-];
+// gambar tidak berubah antar bahasa (urutan harus sama dengan translations.ts certificates.items)
+const CERT_IMAGES = ["/machine-learning.jpg", "/data-enginering.jpeg"];
 
 function CertificateAccordion() {
+  const { t } = useLanguage();
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const certificates = t.certificates.items.map((cert, i) => ({
+    ...cert,
+    image: CERT_IMAGES[i],
+  }));
 
   return (
     <div className="reveal d1 flex flex-col gap-4 max-w-3xl mx-auto">
-      {CERTIFICATES.map((cert, i) => {
+      {certificates.map((cert, i) => {
         const isOpen = openIndex === i;
         return (
           <div
@@ -75,13 +70,15 @@ function CertificateAccordion() {
 }
 
 export default function Certificates() {
+  const { t } = useLanguage();
+
   return (
     <section id="certificates" className="py-24">
       <div className="max-w-6xl mx-auto px-6">
         <div className="reveal text-center mb-14">
-          <p className="text-xs font-medium text-accent tracking-widest uppercase mb-3">Certificate</p>
+          <p className="text-xs font-medium text-accent tracking-widest uppercase mb-3">{t.certificates.eyebrow}</p>
           <h2 className="font-display font-bold text-4xl md:text-5xl text-zinc-900 dark:text-white">
-            Professional <span className="text-accent">Certificate</span>
+            {t.certificates.heading} <span className="text-accent">{t.certificates.headingAccent}</span>
           </h2>
         </div>
 

@@ -1,10 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 function ContactForm() {
+  const { t } = useLanguage();
+  const f = t.contact.form;
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
-  const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -15,9 +18,24 @@ function ContactForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("sending");
-    // TODO: ganti dengan pemanggilan API/route handler kamu, mis. fetch("/api/contact", {...})
-    console.log(form);
-    setStatus("sent");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      if (!res.ok) throw new Error("Failed to send");
+
+      setStatus("sent");
+      setForm({ name: "", email: "", subject: "", message: "" });
+      setTimeout(() => setStatus("idle"), 5000);
+    } catch (err) {
+      console.error(err);
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), 5000);
+    }
   };
 
   return (
@@ -26,7 +44,7 @@ function ContactForm() {
         <div className="grid sm:grid-cols-2 gap-4">
           <div>
             <label htmlFor="fname" className="block text-xs font-medium text-zinc-400 mb-1.5">
-              Name *
+              {f.nameLabel}
             </label>
             <input
               type="text"
@@ -34,7 +52,7 @@ function ContactForm() {
               name="name"
               value={form.name}
               onChange={handleChange}
-              placeholder="Jane Smith"
+              placeholder={f.namePlaceholder}
               required
               autoComplete="name"
               className="w-full bg-zinc-800 border border-zinc-700 text-white text-sm rounded-xl px-4 py-3 placeholder-zinc-600 focus:outline-none focus:border-accent transition-colors"
@@ -42,7 +60,7 @@ function ContactForm() {
           </div>
           <div>
             <label htmlFor="femail" className="block text-xs font-medium text-zinc-400 mb-1.5">
-              Email *
+              {f.emailLabel}
             </label>
             <input
               type="email"
@@ -50,7 +68,7 @@ function ContactForm() {
               name="email"
               value={form.email}
               onChange={handleChange}
-              placeholder="jane@company.com"
+              placeholder={f.emailPlaceholder}
               required
               autoComplete="email"
               className="w-full bg-zinc-800 border border-zinc-700 text-white text-sm rounded-xl px-4 py-3 placeholder-zinc-600 focus:outline-none focus:border-accent transition-colors"
@@ -59,7 +77,7 @@ function ContactForm() {
         </div>
         <div>
           <label htmlFor="fsubject" className="block text-xs font-medium text-zinc-400 mb-1.5">
-            Subject
+            {f.subjectLabel}
           </label>
           <input
             type="text"
@@ -67,13 +85,13 @@ function ContactForm() {
             name="subject"
             value={form.subject}
             onChange={handleChange}
-            placeholder="Project inquiry"
+            placeholder={f.subjectPlaceholder}
             className="w-full bg-zinc-800 border border-zinc-700 text-white text-sm rounded-xl px-4 py-3 placeholder-zinc-600 focus:outline-none focus:border-accent transition-colors"
           />
         </div>
         <div>
           <label htmlFor="fmessage" className="block text-xs font-medium text-zinc-400 mb-1.5">
-            Message *
+            {f.messageLabel}
           </label>
           <textarea
             id="fmessage"
@@ -81,7 +99,7 @@ function ContactForm() {
             rows={4}
             value={form.message}
             onChange={handleChange}
-            placeholder="Tell me about your project..."
+            placeholder={f.messagePlaceholder}
             required
             className="w-full bg-zinc-800 border border-zinc-700 text-white text-sm rounded-xl px-4 py-3 placeholder-zinc-600 focus:outline-none focus:border-accent transition-colors resize-none"
           />
@@ -91,14 +109,34 @@ function ContactForm() {
           disabled={status === "sending"}
           className="shimmer w-full bg-accent text-white font-display font-bold text-sm py-3.5 rounded-xl hover:bg-accent-light transition-colors disabled:opacity-60"
         >
-          {status === "sent" ? "Message sent ✓" : status === "sending" ? "Sending..." : "Send message →"}
+          {status === "sending" ? f.sending : f.sendButton}
         </button>
+
+        {status === "sent" && (
+          <div className="flex items-center gap-2 bg-green-500/10 border border-green-500/30 text-green-400 text-sm rounded-xl px-4 py-3">
+            <svg className="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            {f.successMessage}
+          </div>
+        )}
+
+        {status === "error" && (
+          <div className="flex items-center gap-2 bg-red-500/10 border border-red-500/30 text-red-400 text-sm rounded-xl px-4 py-3">
+            <svg className="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+            {f.errorMessage}
+          </div>
+        )}
       </div>
     </form>
   );
 }
 
 export default function Contact() {
+  const { t } = useLanguage();
+
   return (
     <section id="contact" className="py-24">
       <div className="max-w-6xl mx-auto px-6">
@@ -108,15 +146,13 @@ export default function Contact() {
 
           <div className="relative z-10 grid md:grid-cols-2 gap-12 items-start">
             <div>
-              <p className="reveal text-xs font-medium text-accent tracking-widest uppercase mb-3">Get in touch</p>
+              <p className="reveal text-xs font-medium text-accent tracking-widest uppercase mb-3">{t.contact.eyebrow}</p>
               <h2 className="reveal d1 font-display font-bold text-4xl md:text-5xl text-white leading-tight mb-5">
-                Let&apos;s work
+                {t.contact.headingLine1}
                 <br />
-                together
+                {t.contact.headingLine2}
               </h2>
-              <p className="reveal d2 text-zinc-400 leading-relaxed mb-8">
-                I&apos;m open to software development and IT consulting engagements, short or long-term. New system, feature addition, or just a second pair of eyes — let&apos;s talk.
-              </p>
+              <p className="reveal d2 text-zinc-400 leading-relaxed mb-8">{t.contact.description}</p>
 
               <div className="reveal d3 flex flex-col gap-4">
                 <a href="mailto:sonarianda01@gmail.com" className="group flex items-center gap-3 text-zinc-400 hover:text-white transition-colors">

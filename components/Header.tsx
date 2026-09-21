@@ -1,10 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 
-const NAV_IDS = ["hero", "experience", "portfolio", "skills", "certificates", "contact"];
+const NAV_IDS = ["experience", "portfolio", "skills", "certificates", "contact"] as const;
 
 export default function Header() {
+  const { language, setLanguage, t } = useLanguage();
   const [dark, setDark] = useState(false);
   const [mm, setMm] = useState(false);
   const [sc, setSc] = useState(false);
@@ -24,6 +26,7 @@ export default function Header() {
   }, [dark]);
 
   useEffect(() => {
+    const ids = ["hero", ...NAV_IDS];
     const onScroll = () => {
       setSc(window.scrollY > 20);
       const atBottom =
@@ -32,7 +35,7 @@ export default function Header() {
         setActiveSection("contact");
         return;
       }
-      for (const id of [...NAV_IDS].reverse()) {
+      for (const id of [...ids].reverse()) {
         const el = document.getElementById(id);
         if (el && window.scrollY >= el.offsetTop - 130) {
           setActiveSection(id);
@@ -48,6 +51,8 @@ export default function Header() {
       activeSection === id ? "on !text-zinc-900 dark:!text-white" : ""
     }`;
 
+  const navLabel = (id: (typeof NAV_IDS)[number]) => t.nav[id];
+
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
@@ -61,16 +66,27 @@ export default function Header() {
         </a>
 
         <ul className="hidden md:flex items-center gap-8 text-sm" role="list">
-          {NAV_IDS.slice(1).map((id) => (
+          {NAV_IDS.map((id) => (
             <li key={id}>
               <a href={`#${id}`} className={navLinkClass(id)}>
-                {id.charAt(0).toUpperCase() + id.slice(1)}
+                {navLabel(id)}
               </a>
             </li>
           ))}
         </ul>
 
         <div className="flex items-center gap-3">
+          {/* SWITCH BAHASA */}
+          <button
+            onClick={() => setLanguage(language === "en" ? "id" : "en")}
+            className="w-9 h-9 flex items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors text-xs font-bold text-zinc-700 dark:text-zinc-300"
+            aria-label={language === "en" ? "Switch to Indonesian" : "Switch to English"}
+            title={language === "en" ? "Switch to Indonesian" : "Switch to English"}
+          >
+            {language === "en" ? "EN" : "ID"}
+          </button>
+
+          {/* TOMBOL DARK MODE */}
           <button
             onClick={() => setDark(!dark)}
             className="w-9 h-9 flex items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors"
@@ -91,7 +107,7 @@ export default function Header() {
             href="#contact"
             className="hidden md:inline-flex items-center gap-2 shimmer bg-accent text-white text-sm font-medium px-5 py-2 rounded-full hover:bg-accent-light transition-colors"
           >
-            Hire me
+            {t.nav.hireMe}
             <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
@@ -119,14 +135,14 @@ export default function Header() {
       {mm && (
         <div className="md:hidden bg-white dark:bg-zinc-950 border-t border-zinc-100 dark:border-zinc-900">
           <ul className="flex flex-col px-6 py-5 gap-4 text-sm font-medium" role="list">
-            {NAV_IDS.slice(1).map((id) => (
+            {NAV_IDS.map((id) => (
               <li key={id}>
                 <a
                   href={`#${id}`}
                   onClick={() => setMm(false)}
                   className="block text-zinc-700 dark:text-zinc-300 hover:text-accent transition-colors"
                 >
-                  {id.charAt(0).toUpperCase() + id.slice(1)}
+                  {navLabel(id)}
                 </a>
               </li>
             ))}
@@ -136,7 +152,7 @@ export default function Header() {
                 onClick={() => setMm(false)}
                 className="inline-flex shimmer bg-accent text-white font-medium text-sm px-5 py-2.5 rounded-full"
               >
-                Hire me →
+                {t.nav.hireMe} →
               </a>
             </li>
           </ul>

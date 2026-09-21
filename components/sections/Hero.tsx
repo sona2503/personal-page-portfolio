@@ -1,4 +1,10 @@
+"use client";
+
+import { useLanguage } from "@/lib/i18n/LanguageContext";
+
 export default function Hero() {
+  const { t } = useLanguage();
+
   return (
     <section id="hero" className="relative min-h-screen flex items-center pt-16 overflow-hidden">
       <div className="absolute top-1/4 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl pointer-events-none" aria-hidden="true" />
@@ -7,14 +13,13 @@ export default function Hero() {
       <div className="relative z-10 max-w-6xl mx-auto px-6 py-24 w-full">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div>
-            <p className="reveal text-sm font-medium text-accent tracking-widest uppercase mb-4">Available for project</p>
+            <p className="reveal text-sm font-medium text-accent tracking-widest uppercase mb-4">{t.hero.badge}</p>
             <h1 className="reveal d1 font-display font-bold text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight text-zinc-900 dark:text-white mb-6">
-              Hi, I&apos;m <span className="text-accent">Sona Rianda</span>
+              {t.hero.greetingPrefix} <span className="text-accent">Sona Rianda</span>
             </h1>
             <p className="reveal d2 text-lg md:text-xl text-zinc-500 dark:text-zinc-400 font-light leading-relaxed max-w-md mb-10">
-              <strong className="font-medium text-zinc-700 dark:text-zinc-300">Software Engineer &amp; IT Consultant</strong>{" "}
-              specializing in financial information systems. 3+ years turning complex business logic into clean,
-              production-grade code with ASP.NET Core, Next.js, Node.js, React, and MySQL.
+              <strong className="font-medium text-zinc-700 dark:text-zinc-300">{t.hero.descriptionBold}</strong>{" "}
+              {t.hero.descriptionRest}
             </p>
             <div className="reveal d3 flex flex-wrap gap-4">
               <a
@@ -22,7 +27,7 @@ export default function Hero() {
                 download
                 className="shimmer inline-flex items-center gap-2 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-medium px-7 py-3.5 rounded-full hover:bg-zinc-700 dark:hover:bg-zinc-200 transition-colors text-sm"
               >
-                Download my CV
+                {t.hero.downloadCv}
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3" />
                 </svg>
@@ -31,7 +36,7 @@ export default function Hero() {
                 href="#contact"
                 className="inline-flex items-center gap-2 border border-zinc-300 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 font-medium px-7 py-3.5 rounded-full hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors text-sm"
               >
-                Contact me
+                {t.hero.contactMe}
               </a>
             </div>
             <div className="reveal d4 flex gap-4 mt-14 pt-8 border-t border-zinc-100 dark:border-zinc-900">
@@ -86,7 +91,7 @@ export default function Hero() {
                 />
               </div>
               <div className="absolute -bottom-4 -left-4 bg-accent text-white font-display font-bold text-sm px-4 py-2.5 rounded-2xl shadow-lg">
-                Open to projects
+                {t.hero.openToProjects}
               </div>
             </div>
           </div>
