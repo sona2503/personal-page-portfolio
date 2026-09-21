@@ -15,7 +15,7 @@ export const translations = {
       greetingPrefix: "Hi, I'm",
       descriptionBold: "Software Engineer & IT Consultant",
       descriptionRest:
-        "specializing in financial information systems. 3+ years turning complex business logic into clean, production-grade code with ASP.NET Core, Next.js, Node.js, React, and MySQL.",
+        "specializing in financial information systems. 3+ years turning complex business logic into clean, production-grade code with ASP.NET Core, Laravel, CodeIgniter, Next.js, Node.js, React, and MySQL.",
       downloadCv: "Download my CV",
       contactMe: "Contact me",
       openToProjects: "Open to projects",
@@ -164,7 +164,7 @@ export const translations = {
       greetingPrefix: "Hai, saya",
       descriptionBold: "Software Engineer & IT Consultant",
       descriptionRest:
-        "yang fokus pada sistem informasi keuangan. 3+ tahun pengalaman mengubah logika bisnis yang kompleks menjadi kode production-grade yang bersih dengan ASP.NET Core, Next.js, Node.js, React, dan MySQL.",
+        "yang fokus pada sistem informasi keuangan. 3+ tahun pengalaman mengubah logika bisnis yang kompleks menjadi kode production-grade yang bersih dengan ASP.NET Core, Laravel, CodeIgniter, Next.js, Node.js, React, dan MySQL.",
       downloadCv: "Unduh CV saya",
       contactMe: "Hubungi saya",
       openToProjects: "Terbuka untuk proyek",
