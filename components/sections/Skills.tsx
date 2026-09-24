@@ -17,7 +17,7 @@ const SKILLS = [
   { name: "Tailwind CSS", slug: "tailwindcss" },
   { name: "MySQL", slug: "mysql" },
   { name: "Git", slug: "git" },
-  { name: "Inertia.js", slug: "inertia" },
+  { name: "Express.js", slug: "express" },
 ];
 
 export default function Skills() {
